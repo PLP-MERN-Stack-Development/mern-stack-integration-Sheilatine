@@ -9,7 +9,7 @@ const path = require('path');
 
 // Import routes
 const postRoutes = require('./routes/posts');
-const categoryRoutes = require('./routes/categories');
+
 const authRoutes = require('./routes/auth');
 
 // Load environment variables
@@ -20,7 +20,10 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', // Vite default port
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -35,15 +38,20 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
+
 // API routes
 app.use('/api/posts', postRoutes);
-app.use('/api/categories', categoryRoutes);
 app.use('/api/auth', authRoutes);
+
+
+// Serve images
+app.use('/uploads', express.static('uploads'));
 
 // Root route
 app.get('/', (req, res) => {
   res.send('MERN Blog API is running');
 });
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {

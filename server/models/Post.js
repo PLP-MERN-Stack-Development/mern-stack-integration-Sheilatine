@@ -13,6 +13,7 @@ const PostSchema = new mongoose.Schema(
     content: {
       type: String,
       required: [true, 'Please provide content'],
+      alias: 'body'
     },
     featuredImage: {
       type: String,
@@ -30,12 +31,12 @@ const PostSchema = new mongoose.Schema(
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: false,
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Category',
-      required: true,
+      required: false,
     },
     tags: [String],
     isPublished: {
