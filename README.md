@@ -1,78 +1,192 @@
-# MERN Stack Integration Assignment
 
-This assignment focuses on building a full-stack MERN (MongoDB, Express.js, React.js, Node.js) application that demonstrates seamless integration between front-end and back-end components.
+# 📰 MERN Blog Application
 
-## Assignment Overview
+A **full-stack blog platform** built using the **MERN stack** — MongoDB, Express, React (Vite + Tailwind v4), and Node.js — featuring **user authentication (JWT)**, **post creation**, and **modern responsive design**.
 
-You will build a blog application with the following features:
-1. RESTful API with Express.js and MongoDB
-2. React front-end with component architecture
-3. Full CRUD functionality for blog posts
-4. User authentication and authorization
-5. Advanced features like image uploads and comments
+--
 
-## Project Structure
+## 🚀 Features
+
+* 🔐 User authentication (register, login, logout)
+* ✍️ Create, edit, and view blog posts
+* 🧠 JWT-based authentication middleware
+* 🌈 Styled with Tailwind CSS v4
+* ⚡ Powered by Vite for fast frontend builds
+* 💾 MongoDB for persistent data storage
+* 🔄 RESTful API architecture
+
+---
+
+## 🗂️ Folder Structure
 
 ```
 mern-blog/
-├── client/                 # React front-end
-│   ├── public/             # Static files
-│   ├── src/                # React source code
-│   │   ├── components/     # Reusable components
-│   │   ├── pages/          # Page components
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── services/       # API services
-│   │   ├── context/        # React context providers
-│   │   └── App.jsx         # Main application component
-│   └── package.json        # Client dependencies
-├── server/                 # Express.js back-end
-│   ├── config/             # Configuration files
-│   ├── controllers/        # Route controllers
-│   ├── models/             # Mongoose models
-│   ├── routes/             # API routes
-│   ├── middleware/         # Custom middleware
-│   ├── utils/              # Utility functions
-│   ├── server.js           # Main server file
-│   └── package.json        # Server dependencies
-└── README.md               # Project documentation
+│
+├── backend/
+│   ├── models/
+│   │   └── User.js
+│   │   └── Post.js
+│   ├── routes/
+│   │   └── auth.js
+│   │   └── posts.js
+│   ├── middleware/
+│   │   └── auth.js
+│   ├── server.js
+│   ├── .env
+│
+├── client/
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── api.js
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx
+│   │   ├── pages/
+│   │   │   ├── Home.jsx
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   ├── CreatePost.jsx
+│   │   │   ├── PostPage.jsx
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   ├── index.css
+│   ├── vite.config.js
+│   ├── .env
+│
+└── README.md
 ```
 
-## Getting Started
+---
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week4-Assignment.md` file
-4. Complete the tasks outlined in the assignment
+## ⚙️ Tech Stack
 
-## Files Included
+**Frontend**
 
-- `Week4-Assignment.md`: Detailed assignment instructions
-- Starter code for both client and server:
-  - Basic project structure
-  - Configuration files
-  - Sample models and components
+* React (Vite)
+* Tailwind CSS v4
+* Axios
+* React Router DOM
 
-## Requirements
+**Backend**
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Git
+* Node.js
+* Express
+* MongoDB + Mongoose
+* bcryptjs
+* jsonwebtoken
+* dotenv
+* cors
 
-## Submission
+---
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+## 🧩 Installation & Setup
 
-1. Complete both the client and server portions of the application
-2. Implement all required API endpoints
-3. Create the necessary React components and hooks
-4. Document your API and setup process in the README.md
-5. Include screenshots of your working application
+### 1️⃣ Clone the repository
 
-## Resources
+```bash
+git clone https://github.com/your-username/mern-blog.git
 
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [Express.js Documentation](https://expressjs.com/)
-- [React Documentation](https://react.dev/)
-- [Node.js Documentation](https://nodejs.org/en/docs/)
-- [Mongoose Documentation](https://mongoosejs.com/docs/) 
+### 2️⃣ Backend Setup
+
+```bash
+cd backend
+npm install
+```
+
+Create a `.env` file inside `backend/` with:
+
+```env
+MONGO_URI=mongodb+srv://<your-mongodb-uri>
+JWT_SECRET=yourSuperSecretKey
+PORT=5000
+```
+
+Run backend:
+
+```bash
+npm start
+```
+
+Expected output:
+
+```
+Connected to MongoDB
+Server running on port 5000
+```
+
+---
+
+### 3️⃣ Frontend Setup
+
+```bash
+cd ../client
+npm install
+```
+
+Create a `.env` file inside `client/` with:
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+Run frontend:
+
+```bash
+npm run dev
+```
+
+Open: [http://localhost:5173](http://localhost:5173)
+
+---
+
+## 🧠 API Routes
+
+### 🔹 Auth Routes
+
+| Method | Endpoint             | Description                       |
+| ------ | -------------------- | --------------------------------- |
+| POST   | `/api/auth/register` | Register a new user               |
+| POST   | `/api/auth/login`    | Login and get JWT                 |
+| GET    | `/api/auth/me`       | Get current user (requires token) |
+
+### 🔹 Post Routes
+
+| Method | Endpoint         | Description                  |
+| ------ | ---------------- | ---------------------------- |
+| GET    | `/api/posts`     | Get all posts                |
+| GET    | `/api/posts/:id` | Get single post              |
+| POST   | `/api/posts`     | Create post (requires token) |
+
+---
+
+## 💡 Environment Variables Summary
+
+| Location | Variable       | Example                                                |
+| -------- | -------------- | ------------------------------------------------------ |
+| Backend  | `MONGO_URI`    | your MongoDB connection string                         |
+| Backend  | `JWT_SECRET`   | secret key for JWT                                     |
+| Backend  | `PORT`         | 5000                                                   |
+| Frontend | `VITE_API_URL` | [http://localhost:5000/api](http://localhost:5000/api) |
+
+---
+
+## 🧱 Example User Flow
+
+1️⃣ User visits `/register` → creates account → token stored in `localStorage`
+2️⃣ User logs in → redirected to home → token attached to requests
+3️⃣ User can create/view posts → data saved in MongoDB
+
+---
+
+#### `src/index.css`
+
+```css
+@import "tailwindcss";
+```
+
+--
+
+## 👩🏽‍💻 Author
+
+**Sheila Christine**
+
+Would you like me to make this README *auto-tailored* for your specific project name (e.g. “ExploreChuka Blog” or “Sheila’s Dev Journal”) — with your logo colors and tagline included?
